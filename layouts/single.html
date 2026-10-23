@@ -1,0 +1,24 @@
+{{ define "main" }}
+{{ $hasToc := gt (len (findRE "<a " .TableOfContents)) 0 }}
+{{ $sectionName := .CurrentSection.Title | lower }}
+<a class="back-link" href="{{ .CurrentSection.RelPermalink }}">← All {{ $sectionName }}</a>
+<div class="article-layout{{ if $hasToc }} with-toc{{ end }}">
+  <article class="article">
+    <header class="article-header">
+      <h1>{{ replace .Title "_" " " }}</h1>
+      <p class="article-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ with .Params.label }}<span>{{ . }}</span>{{ end }}{{ if .WordCount }}<span>{{ .ReadingTime }} min read</span>{{ end }}{{ if .Draft }}<span>Draft</span>{{ end }}</p>
+      {{ with .Description }}<p class="article-description">{{ . }}</p>{{ end }}
+      {{ with .Params.authors }}<p class="entry-detail">{{ delimit . ", " }}</p>{{ end }}
+      {{ with .Params.venue }}<p class="entry-detail">{{ . }}</p>{{ end }}
+      {{ partial "resource-links.html" . }}
+    </header>
+    {{ if $hasToc }}<details class="mobile-toc"><summary>On this page</summary>{{ .TableOfContents }}</details>{{ end }}
+    <div class="prose" data-article>{{ .Content }}</div>
+  </article>
+  {{ if $hasToc }}
+  <aside class="toc-sidebar" aria-label="Article contents">
+    <div class="toc-sticky"><h2>On this page</h2><div class="toc-track" data-toc>{{ .TableOfContents }}</div><a class="back-top" href="#main">Back to top ↑</a></div>
+  </aside>
+  {{ end }}
+</div>
+{{ end }}

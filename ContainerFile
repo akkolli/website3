@@ -1,3 +1,10 @@
+FROM ghcr.io/gohugoio/hugo:v0.168.0 AS build
+USER root
+WORKDIR /src
+COPY . .
+ARG BASE_URL=https://example.org/
+RUN hugo --minify --buildDrafts=false --baseURL "${BASE_URL}" --destination /out
+
 FROM docker.io/library/nginx:stable-alpine
-COPY index.html /usr/share/nginx/html/index.html
+COPY --from=build /out/ /usr/share/nginx/html/
 EXPOSE 80

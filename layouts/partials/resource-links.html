@@ -1,0 +1,3 @@
+{{ if or .Params.paper .Params.code .Params.website }}
+<p class="resource-links">{{ with .Params.paper }}<a href="{{ . }}">Paper</a>{{ end }}{{ with .Params.code }}<a href="{{ . }}">Code</a>{{ end }}{{ with .Params.website }}<a href="{{ . }}">Website</a>{{ end }}</p>
+{{ end }}

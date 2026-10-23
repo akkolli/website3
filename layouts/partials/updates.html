@@ -1,0 +1,13 @@
+{{ if . }}
+<ul class="entry-list update-list">
+  {{ range . }}
+  <li class="entry">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+    <div class="entry-content">
+      <span>{{ replace .Title "_" " " }}</span>{{ if .Draft }}<span class="entry-label">Draft</span>{{ end }}
+      {{ with .Plain }}<p class="entry-description">{{ . }}</p>{{ end }}
+    </div>
+  </li>
+  {{ end }}
+</ul>
+{{ else }}<p class="empty-state">No updates posted yet.</p>{{ end }}

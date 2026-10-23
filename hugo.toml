@@ -1,0 +1,19 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Akshay Kolli'
+buildDrafts = false
+
+[params]
+  description = 'Notes on world models, multi-agent systems, and things I am learning.'
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = false
+
+[params.social]
+  github = 'https://github.com/akkolli'
+  scholar = 'https://scholar.google.com/citations?user=aAezuzMAAAAJ&hl=en'
+
+[markup.highlight]
+  style = 'github'

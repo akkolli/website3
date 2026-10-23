@@ -1,0 +1,22 @@
+{{ if .pages }}
+<ul class="entry-list{{ if eq .section "updates" }} update-list{{ end }}">
+  {{ range .pages }}
+  <li class="entry">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+    <div class="entry-content">
+      <a class="entry-title" href="{{ .RelPermalink }}">{{ replace .Title "_" " " }}</a>
+      {{ if .Draft }}<span class="entry-label">Draft</span>{{ end }}
+      {{ with .Params.label }}<span class="entry-label">{{ . }}</span>{{ end }}
+      {{ if eq .Section "research" }}
+        {{ with .Params.authors }}<p class="entry-detail">{{ delimit . ", " }}</p>{{ end }}
+        {{ with .Params.venue }}<p class="entry-detail">{{ . }}</p>{{ end }}
+      {{ end }}
+      {{ with .Description }}<p class="entry-description">{{ . }}</p>{{ end }}
+      {{ partial "resource-links.html" . }}
+    </div>
+  </li>
+  {{ end }}
+</ul>
+{{ else }}
+  {{ with .empty }}<p class="empty-state">{{ . }}</p>{{ end }}
+{{ end }}

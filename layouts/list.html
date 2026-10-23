@@ -1,0 +1,16 @@
+{{ define "main" }}
+<header class="page-heading">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p>{{ . }}</p>{{ end }}
+</header>
+{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+{{ if in (slice "posts" "research" "software" "updates") .Section }}
+  {{ $empty := "Nothing published here yet." }}
+  {{ if eq .Section "research" }}{{ $empty = "Papers and research write-ups will appear here." }}{{ end }}
+  {{ if eq .Section "software" }}{{ $empty = "Open-source apps and projects will appear here." }}{{ end }}
+  {{ if eq .Section "updates" }}{{ $empty = "No updates posted yet." }}{{ end }}
+  {{ partial "entries.html" (dict "pages" .RegularPages.ByDate.Reverse "section" .Section "empty" $empty) }}
+{{ else }}
+  <ul>{{ range .Pages }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+{{ end }}
+{{ end }}

@@ -1,0 +1,26 @@
+<header class="intro">
+  <div class="nameplate">
+    <div class="nameplate-identity">
+      <h1>Akshay Kolli</h1>
+      <p class="affiliation">
+        <span class="position">PhD Candidate, Computer Science</span>
+        <span class="school">Miner School of Computer and Information Sciences</span>
+        <em>University of Massachusetts Lowell</em>
+      </p>
+      <div class="intro-copy">
+        <p>I work on task agnostic world models for multi-agent systems.</p>
+      </div>
+    </div>
+    {{ with resources.Get "images/p.jpg" }}
+    {{ $photo := .Resize "640x jpg q90" }}
+    <div class="profile-photo">
+      <img src="{{ $photo.RelPermalink }}" alt="Akshay outdoors" width="{{ $photo.Width }}" height="{{ $photo.Height }}">
+    </div>
+    {{ end }}
+  </div>
+  <div class="profile-contact">
+    <a class="email" href="mailto:akshay_kolli@student.uml.edu" title="akshay_kolli@student.uml.edu">Email</a>
+    {{ with site.Params.social.github }}<a href="{{ . }}" rel="me">GitHub</a>{{ end }}
+    {{ with site.Params.social.scholar }}<a href="{{ . }}" rel="me">Scholar</a>{{ end }}
+  </div>
+</header>

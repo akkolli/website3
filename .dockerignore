@@ -1,0 +1,6 @@
+.git
+public
+resources
+.hugo_build.lock
+design-explorations
+.DS_Store
