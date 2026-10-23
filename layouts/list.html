@@ -1,7 +1,6 @@
 {{ define "main" }}
 <header class="page-heading">
   <h1>{{ .Title }}</h1>
-  {{ with .Description }}<p>{{ . }}</p>{{ end }}
 </header>
 {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
 {{ if in (slice "posts" "research" "software" "updates") .Section }}
