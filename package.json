@@ -1,0 +1,15 @@
+{
+  "name": "website3",
+  "private": true,
+  "scripts": {
+    "build": "hugo --minify --buildDrafts=false --cleanDestinationDir",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "hugo-extended": "0.168.0",
+    "wrangler": "4.152.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

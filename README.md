@@ -40,6 +40,25 @@ hugo --minify --buildDrafts=false --cleanDestinationDir
 The generated site is in `public/`. Generated files, caches, and local design
 explorations are excluded from Git.
 
+## Cloudflare Workers
+
+Cloudflare's Git integration deploys this repository with `npx wrangler deploy`.
+The checked-in Wrangler configuration runs `npm run build` first and uploads
+only `public/`. Drafts are excluded. Hugo and Wrangler are pinned in
+`package.json` and `package-lock.json`; the build does not use `npx hugo`.
+
+Use Node.js 22 or later. To verify the same build locally without publishing:
+
+```sh
+npm ci
+npx wrangler deploy --dry-run
+```
+
+In Cloudflare, leave the separate build command blank and keep the deploy
+command as `npx wrangler deploy`. The build command is defined in
+`wrangler.jsonc`. Set the build environment variable `HUGO_BASEURL` to the final
+site address, or set `baseURL` in `hugo.toml`.
+
 ## Container
 
 The container builds the Hugo source, excludes drafts, and serves the result

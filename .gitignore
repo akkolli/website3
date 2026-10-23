@@ -3,3 +3,5 @@
 /.hugo_build.lock
 /design-explorations/
 .DS_Store
+/node_modules/
+/.wrangler/
