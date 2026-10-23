@@ -1,4 +1,4 @@
 +++
-title = 'Writing'
-description = 'Technical notes and personal essays.'
+title = 'Posts'
+description = 'Posts by Akshay Kolli.'
 +++

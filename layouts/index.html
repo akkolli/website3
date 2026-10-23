@@ -1,23 +1,9 @@
 {{ define "main" }}
 {{ partial "profile.html" . }}
 <div class="home-overview">
-{{ partial "navigation.html" . }}
-<section class="home-section" aria-labelledby="selected-heading">
-  <h2 id="selected-heading">Selected work</h2>
-  {{ $hasWork := false }}
-  {{ range slice (dict "section" "research" "title" "Research" "limit" 2) (dict "section" "posts" "title" "Writing" "limit" 3) (dict "section" "software" "title" "Software" "limit" 2) }}
-    {{ $pages := (where site.RegularPages "Section" .section).ByDate.Reverse }}
-    {{ $selected := where $pages "Params.selected" true }}
-    {{ if $selected }}{{ $pages = $selected }}{{ end }}
-    {{ if $pages }}
-      {{ $hasWork = true }}
-      <section class="work-group" aria-labelledby="{{ .section }}-heading">
-        <div class="section-heading"><h3 id="{{ .section }}-heading">{{ .title }}</h3><a href="{{ printf "%s/" .section | relURL }}">All {{ lower .title }} →</a></div>
-        {{ partial "entries.html" (dict "pages" (first .limit $pages) "section" .section) }}
-      </section>
-    {{ end }}
-  {{ end }}
-  {{ if not $hasWork }}<p class="empty-state">Work will appear here as it is published.</p>{{ end }}
+<section class="home-section" id="posts" aria-labelledby="posts-heading">
+  <h2 id="posts-heading">Posts</h2>
+  {{ partial "entries.html" (dict "pages" (partial "posts.html" .) "empty" "No posts published yet.") }}
 </section>
 <section class="home-section" id="updates" aria-labelledby="updates-heading">
   <h2 id="updates-heading">Updates</h2>

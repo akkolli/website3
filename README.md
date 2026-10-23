@@ -1,7 +1,7 @@
 # Akshay Kolli's website
 
-A Hugo site with an academic letterhead, research and writing collections,
-software pages, professional updates, and a section-aware table of contents.
+A Hugo site with an academic letterhead, a chronological list of posts with
+clickable tags, professional updates, and a section-aware table of contents.
 
 ## Preview
 
@@ -17,16 +17,27 @@ preview unpublished content, add `--buildDrafts`.
 ## Add content
 
 ```sh
-hugo new content posts/my-note.md
-hugo new content research/my-paper.md
-hugo new content software/my-app.md
+hugo new content posts/my-post.md
 hugo new content updates/my-update.md
 ```
 
 New content starts with `draft = true`. Set it to `false` when ready to publish.
-Use `selected = true` to feature an item on the homepage, and the post's `label`
-to distinguish technical notes and essays. Updates appear as text at the bottom
-of the homepage.
+All published posts appear together, newest first. Add one or more tags in the
+post's front matter, for example:
+
+```toml
+tags = ['Technical note', 'World models']
+```
+
+Tags appear beside post titles and in article headers. Each tag opens a list of
+related posts. Use tags such as `Research`, `Technical note`, `Personal essay`,
+and `Software` to distinguish types of content, and add topic tags as needed.
+
+Existing content in `research/` and `software/` also appears in the combined
+posts list with its original URLs. Their archetypes remain available and supply
+a default tag. Posts can include `authors`, `venue`, `paper`, `code`, and
+`website` fields when useful. Professional updates stay separate as plain text
+at the bottom of the homepage.
 
 ## Build
 

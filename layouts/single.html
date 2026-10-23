@@ -1,12 +1,15 @@
 {{ define "main" }}
 {{ $hasToc := gt (len (findRE "<a " .TableOfContents)) 0 }}
-{{ $sectionName := .CurrentSection.Title | lower }}
-<a class="back-link" href="{{ .CurrentSection.RelPermalink }}">← All {{ $sectionName }}</a>
+{{ if eq .Section "updates" }}
+<a class="back-link" href="{{ site.Home.RelPermalink }}#updates">← Updates</a>
+{{ else }}
+<a class="back-link" href="{{ "posts/" | relURL }}">← All posts</a>
+{{ end }}
 <div class="article-layout{{ if $hasToc }} with-toc{{ end }}">
   <article class="article">
     <header class="article-header">
       <h1>{{ replace .Title "_" " " }}</h1>
-      <p class="article-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ with .Params.label }}<span>{{ . }}</span>{{ end }}{{ if .WordCount }}<span>{{ .ReadingTime }} min read</span>{{ end }}{{ if .Draft }}<span>Draft</span>{{ end }}</p>
+      <p class="article-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>{{ partial "tags.html" . }}{{ if .WordCount }}<span>{{ .ReadingTime }} min read</span>{{ end }}{{ if .Draft }}<span>Draft</span>{{ end }}</p>
       {{ with .Description }}<p class="article-description">{{ . }}</p>{{ end }}
       {{ with .Params.authors }}<p class="entry-detail">{{ delimit . ", " }}</p>{{ end }}
       {{ with .Params.venue }}<p class="entry-detail">{{ . }}</p>{{ end }}

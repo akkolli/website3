@@ -1,15 +1,25 @@
 {{ define "main" }}
+{{ $isPosts := and .IsSection (eq .Section "posts") }}
+{{ $isTag := and (eq .Kind "term") (eq .Data.Plural "tags") }}
+{{ if $isPosts }}
+<a class="back-link" href="{{ site.Home.RelPermalink }}">← Home</a>
+{{ else }}
+<a class="back-link" href="{{ "posts/" | relURL }}">← All posts</a>
+{{ end }}
 <header class="page-heading">
-  <h1>{{ .Title }}</h1>
+  <h1>{{ if $isTag }}Posts tagged “{{ .Title }}”{{ else }}{{ .Title }}{{ end }}</h1>
 </header>
 {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
-{{ if in (slice "posts" "research" "software" "updates") .Section }}
-  {{ $empty := "Nothing published here yet." }}
-  {{ if eq .Section "research" }}{{ $empty = "Papers and research write-ups will appear here." }}{{ end }}
-  {{ if eq .Section "software" }}{{ $empty = "Open-source apps and projects will appear here." }}{{ end }}
-  {{ if eq .Section "updates" }}{{ $empty = "No updates posted yet." }}{{ end }}
-  {{ partial "entries.html" (dict "pages" .RegularPages.ByDate.Reverse "section" .Section "empty" $empty) }}
+{{ if $isPosts }}
+  {{ partial "entries.html" (dict "pages" (partial "posts.html" .) "empty" "No posts published yet.") }}
+{{ else if $isTag }}
+  {{ $posts := where .RegularPages "Section" "in" (slice "posts" "research" "software") }}
+  {{ partial "entries.html" (dict "pages" $posts.ByDate.Reverse "empty" "No posts with this tag yet.") }}
+{{ else if eq .Section "updates" }}
+  {{ partial "updates.html" .RegularPages.ByDate.Reverse }}
+{{ else if in (slice "research" "software") .Section }}
+  {{ partial "entries.html" (dict "pages" .RegularPages.ByDate.Reverse "empty" "No posts published yet.") }}
 {{ else }}
-  <ul>{{ range .Pages }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
+  <ul class="tag-index">{{ range .Pages.ByTitle }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}</ul>
 {{ end }}
 {{ end }}

@@ -1,6 +1,0 @@
-<nav class="site-nav" aria-label="Main navigation">
-  <a href="{{ site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>Home</a>
-  <a href="{{ "research/" | relURL }}"{{ if eq .Section "research" }} aria-current="{{ if .IsSection }}page{{ else }}true{{ end }}"{{ end }}>Research</a>
-  <a href="{{ "posts/" | relURL }}"{{ if eq .Section "posts" }} aria-current="{{ if .IsSection }}page{{ else }}true{{ end }}"{{ end }}>Writing</a>
-  <a href="{{ "software/" | relURL }}"{{ if eq .Section "software" }} aria-current="{{ if .IsSection }}page{{ else }}true{{ end }}"{{ end }}>Software</a>
-</nav>

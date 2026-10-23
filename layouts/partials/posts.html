@@ -1,0 +1,2 @@
+{{ $posts := where site.RegularPages "Section" "in" (slice "posts" "research" "software") }}
+{{ return $posts.ByDate.Reverse }}

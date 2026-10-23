@@ -12,7 +12,6 @@
 <body{{ if .IsHome }} class="home"{{ end }}>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="site-shell">
-    {{ if not .IsHome }}{{ partial "navigation.html" . }}{{ end }}
     <main id="main">{{ block "main" . }}{{ end }}</main>
     <footer class="site-footer"><a href="{{ "index.xml" | relURL }}">RSS</a>{{ if not .IsHome }}<a href="{{ site.Home.RelPermalink }}">Back to home</a>{{ end }}</footer>
   </div>

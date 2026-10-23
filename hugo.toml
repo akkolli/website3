@@ -17,3 +17,6 @@ buildDrafts = false
 
 [markup.highlight]
   style = 'github'
+
+[taxonomies]
+  tag = 'tags'
